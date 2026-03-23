@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}选课 - 学生管理系统{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4><i class="bi bi-card-list"></i> 添加选课</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">学生</label>
+                        {{ form.student }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">课程</label>
+                        {{ form.course }}
+                    </div>
+                    <button type="submit" class="btn btn-danger">确认选课</button>
+                    <a href="{% url 'enrollment_list' %}" class="btn btn-secondary">返回</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

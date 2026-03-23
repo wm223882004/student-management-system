@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}首页 - 学生管理系统{% endblock %}
+
+{% block content %}
+<h2 class="mb-4"><i class="bi bi-speedometer2"></i> 数据概览</h2>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5><i class="bi bi-people-fill"></i> 学生总数</h5>
+                <h2>{{ student_count }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5><i class="bi bi-book-fill"></i> 课程总数</h5>
+                <h2>{{ course_count }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <h5><i class="bi bi-clipboard-data"></i> 平均成绩</h5>
+                <h2>{{ avg_score|default:"--" }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="mb-3"><i class="bi bi-lightning"></i> 快捷入口</h4>
+<div class="row">
+    <div class="col-md-2">
+        <a href="{% url 'student_list' %}" class="btn btn-outline-primary w-100 mb-2">
+            <i class="bi bi-people"></i> 学生管理
+        </a>
+    </div>
+    <div class="col-md-2">
+        <a href="{% url 'teacher_list' %}" class="btn btn-outline-success w-100 mb-2">
+            <i class="bi bi-person-badge"></i> 教师管理
+        </a>
+    </div>
+    <div class="col-md-2">
+        <a href="{% url 'course_list' %}" class="btn btn-outline-info w-100 mb-2">
+            <i class="bi bi-book"></i> 课程管理
+        </a>
+    </div>
+    <div class="col-md-2">
+        <a href="{% url 'grade_list' %}" class="btn btn-outline-warning w-100 mb-2">
+            <i class="bi bi-clipboard-data"></i> 成绩管理
+        </a>
+    </div>
+    <div class="col-md-2">
+        <a href="{% url 'enrollment_list' %}" class="btn btn-outline-danger w-100 mb-2">
+            <i class="bi bi-card-list"></i> 选课管理
+        </a>
+    </div>
+    <div class="col-md-2">
+        <a href="{% url 'grade_statistics' %}" class="btn btn-outline-secondary w-100 mb-2">
+            <i class="bi bi-bar-chart"></i> 成绩统计
+        </a>
+    </div>
+</div>
+{% endblock %}

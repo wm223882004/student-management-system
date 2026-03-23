@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}成绩统计 - 学生管理系统{% endblock %}
+
+{% block content %}
+<h2 class="mb-4"><i class="bi bi-bar-chart"></i> 成绩统计</h2>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5>平均分</h5>
+                <h2>{{ stats.avg_score|default:"--"|floatformat:2 }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5>最高分</h5>
+                <h2>{{ stats.max_score|default:"--" }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h5>最低分</h5>
+                <h2>{{ stats.min_score|default:"--" }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="mb-3">各课程成绩统计</h4>
+<div class="table-responsive mb-4">
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>课程</th>
+                <th>考试人数</th>
+                <th>平均分</th>
+                <th>最高分</th>
+                <th>最低分</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cs in course_stats %}
+            <tr>
+                <td>{{ cs.course.name }}</td>
+                <td>{{ cs.count }}</td>
+                <td>{{ cs.avg }}</td>
+                <td>{{ cs.max }}</td>
+                <td>{{ cs.min }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">暂无数据</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h4 class="mb-3 text-danger">不及格预警</h4>
+<div class="table-responsive">
+    <table class="table table-bordered border-danger">
+        <thead class="table-danger">
+            <tr>
+                <th>学生</th>
+                <th>学号</th>
+                <th>课程</th>
+                <th>成绩</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grade in failing_grades %}
+            <tr>
+                <td>{{ grade.student.name }}</td>
+                <td>{{ grade.student.student_id }}</td>
+                <td>{{ grade.course.name }}</td>
+                <td class="text-danger fw-bold">{{ grade.score }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">暂无不及格记录</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<a href="{% url 'grade_list' %}" class="btn btn-secondary">返回成绩列表</a>
+{% endblock %}

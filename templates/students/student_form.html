@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }}学生 - 学生管理系统{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-{% if action == '添加' %}primary{% else %}warning{% endif %} text-white">
+                <h4><i class="bi bi-person-plus"></i> {{ action }}学生</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">用户名</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">密码</label>
+                            {{ form.password }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">学号</label>
+                            {{ form.student_id }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">姓名</label>
+                            {{ form.name }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">性别</label>
+                            {{ form.gender }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">年龄</label>
+                            {{ form.age }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">专业</label>
+                            {{ form.major }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">入学年份</label>
+                            {{ form.enrollment_year }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">电话</label>
+                            {{ form.phone }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">邮箱</label>
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">地址</label>
+                        {{ form.address }}
+                    </div>
+                    <button type="submit" class="btn btn-{% if action == '添加' %}primary{% else %}warning{% endif %}">保存</button>
+                    <a href="{% url 'student_list' %}" class="btn btn-secondary">返回</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

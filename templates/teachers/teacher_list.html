@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}教师列表 - 学生管理系统{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-person-badge"></i> 教师管理</h2>
+    <a href="{% url 'teacher_add' %}" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> 添加教师
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>教师编号</th>
+                <th>姓名</th>
+                <th>职称</th>
+                <th>所属院系</th>
+                <th>电话</th>
+                <th>邮箱</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{ teacher.teacher_id }}</td>
+                <td>{{ teacher.name }}</td>
+                <td>{{ teacher.title|default:"--" }}</td>
+                <td>{{ teacher.department }}</td>
+                <td>{{ teacher.phone|default:"--" }}</td>
+                <td>{{ teacher.email|default:"--" }}</td>
+                <td>
+                    <a href="{% url 'teacher_edit' teacher.pk %}" class="btn btn-sm btn-warning">编辑</a>
+                    <a href="{% url 'teacher_delete' teacher.pk %}" class="btn btn-sm btn-danger">删除</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">暂无数据</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
